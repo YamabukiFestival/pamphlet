@@ -1,0 +1,870 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');  /*Google Fonts Sans*/
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Noto+Serif+JP&display=swap'); /*Google Fonts Serif*/
+
+
+/* フォント設定 スクロールバー設定 */
+html{
+    /* フォントファミリーをサンズセリフに設定 */
+	font-family: 'Noto Sans JP', sans-serif;
+    /* フォントサイズを10pxに設定 */
+	font-size: 10px;
+
+    /* スクロールバーを非表示 */
+	scrollbar-width: none; /*FireFox*/
+	-ms-overflow-style: none; /*IE, Microsoft Edge*/
+}
+
+/* スクロールバーを非表示 Chrome */
+html::-webkit-scrollbar{
+	display: none;
+}
+
+/* 余白の消去 基本文字色の設定 */
+body{
+    /* 余白 */
+	margin: 0;
+	padding: 0;
+    /* 文字色 */
+	color: #333;
+}
+
+/* スクロール連動アニメーション */
+.single-item + .single-item{
+    margin-top: 8rem;
+}
+
+/* アニメーション前 */
+.u-fade-type-up{
+    transform: translateY(15%);
+    -webkit-transform: translateY(15%);
+    -moz-transform: translateY(15%);
+    -ms-transform: translateY(15%);
+    opacity: 0;
+}
+
+/* トリガー発火でis-activeを付与 */
+.u-fade-type-up.is-active{
+    transition: .6s;
+    -webkit-transition: .6s;
+    -moz-transition: .6s;
+    -ms-transition: .6s;
+    transform: translateY(0);
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    opacity: 1;
+}
+
+/* clearfixで回り込みを解除 */
+.clearfix::after{
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* サイズ設定 border-box */
+.border-box{
+	box-sizing: border-box;
+}
+
+
+nav {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: -30rem;
+    bottom: 0;
+    width: 30rem;
+    background: #ffffff;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    transition: all .5s;
+    z-index: 3;
+    opacity: 0;
+}
+.open nav {
+    left: 0;
+    opacity: 1;
+}
+nav .inner {
+    padding: 2rem;
+}
+nav .inner ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+nav .inner ul li{
+    position: relative;
+    margin: 0;
+    border-bottom: 0.1rem solid #ccc;
+}
+nav .inner ul li a {
+    display: block;
+    color: #333;
+    font-size: 1.4rem;
+    padding: 1em;
+    text-decoration: none;
+    transition-duration: 0.2s;
+}
+
+nav .inner ul li::after{
+    display: block;
+    position: absolute;
+    top: 4.3rem;
+    left: 0;
+    width: 0%;
+    padding-bottom: 0.5rem;
+    content: '';
+    background-color: #ff9999;
+
+    transition: width .3s ease-in-out;
+}
+
+nav .inner ul li:hover{
+    border-color: #fff;
+}
+
+nav .inner ul li:hover::after{
+    width: 100%;
+}
+
+nav .inner ul li a:hover {
+    background: #ffeeee;
+    border-bottom: 0;
+}
+
+.toggle_btn {
+    display: block;
+    float: right;
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+    transition: all .5s;
+    cursor: pointer;
+    z-index: 3;
+}
+.toggle_btn span {
+    display: block;
+    width: 3rem;
+    height: 0.3rem;
+    background-color: #555;
+    border-radius: 0.15rem;
+    transition: all .5s;
+}
+.toggle_btn span:nth-of-type(1) {
+    margin-top: 0.4rem;
+}
+.toggle_btn span:nth-of-type(2) {
+    margin-top: 0.65rem;
+    margin-bottom: 0.65rem;
+}
+.toggle_btn span:nth-child(3) {
+    margin-bottom: 0.4rem;
+}
+.open .toggle_btn span {
+    background-color: #555;
+}
+.open .toggle_btn span:nth-child(1) {
+    -webkit-transform: translateY(0.95rem) rotate(-315deg);
+    transform: translateY(0.95rem) rotate(-315deg);
+}
+.open .toggle_btn span:nth-child(2) {
+    opacity: 0;
+}
+.open .toggle_btn span:nth-child(3) {
+    -webkit-transform: translateY(-0.95rem) rotate(315deg);
+    transform: translateY(-0.95rem) rotate(315deg);
+}
+
+#mask {
+    display: none;
+    transition: all .5s;
+}
+.open #mask {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ccc;
+    opacity: .8;
+    z-index: 2;
+    cursor: pointer;
+}
+
+/* フォントスタイル基本設定 */
+
+/* h1 h2 p 共通設定 */
+h1, h2, p{
+    display: block;
+
+    text-align: center;
+
+    font-family: 'Noto Serif JP';
+    font-weight: normal;
+}
+
+/* h1 高さ60px */
+h1{
+	font-size: 6rem;
+	line-height: 6rem;
+}
+
+/* h2 高さ10px */
+h2{
+	font-size: 3rem;
+	line-height: 1rem;
+}
+
+/* p 一行の高さ50px 上下のmargin 50px */
+p{
+	margin: 5rem 0;
+
+	font-size: 2rem;
+	line-height: 5rem;
+
+
+}
+
+.document h1{
+    width: 83.3333%;
+	margin: 5rem 8.3333%;
+	font-size: 6rem;
+	text-align: left;
+}
+
+.document p{
+    width: 83.3333%;
+	margin: 2rem 8.3333%;
+	padding-left: 4rem;
+	font-size: 2rem;
+	line-height: 5rem;
+	text-align: left;
+}
+
+
+.document .h-icon{
+	margin-right: 1rem;
+}
+
+/* フォントをセリフに設定 */
+.font-serif{
+    font-family: 'Noto Serif JP', serif;
+}
+
+.fa-back-icon{
+    font-size: 5rem;
+}
+
+/* ボックススタイル基本設定 */
+.cn-block{
+    display: block;
+
+    width: 100%;
+    margin: 5rem 0;
+}
+
+/* ヘッダー設定 */
+.header{
+    display: block;
+
+    width: 100%;
+    height: 69rem;
+
+    background-color: #003366;
+
+}
+
+.header-img{
+    display: block;
+
+    width: 100%;
+    height: 60rem;
+    background-image: url('/pamphlet/img/header-img.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+
+.header-bar{
+    width: 100%;
+    height: 9rem;
+    background-color: #fff;
+}
+
+.header-logo{
+    display: block;
+    padding-top: 40rem;
+
+    text-align: center;
+    font-size: 4rem;
+
+    color: #fff;
+}
+
+.header-title{
+    display: block;
+    float: left;
+
+    line-height: 3rem;
+    margin: 3rem;
+
+    font-size: 3rem;
+
+
+}
+
+/* ##### コンテンツボタン 設定 ##### */
+.cn-button{
+    display: flex;
+
+    cursor: pointer;
+    
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    height: 8rem;
+    width: 38.5rem;
+
+    margin: 0 auto;
+
+    border-radius: 4rem;
+
+    font-size: 2.4rem;
+
+    color: #fff;
+    background-color: #ff9999;
+    border: #ff9999 0.3rem solid;
+
+    transition: all 0.3s ease-in-out;
+    -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+    -ms-transition: all 0.3s ease-in-out;
+}
+
+.cn-button:hover{
+    color: #ff9999;
+    background-color: #fff;
+    border-color: #ff9999;
+}
+
+/* ##### コンテンツボックス 1 設定 ##### */
+
+.cn-box-1, .cn-box-1-hv, .cn-box-1-l, .cn-box-1-m{
+    display: block;
+    float: left;
+
+    width: 50%;
+    height: 20rem;
+
+    background-color: #fff;
+
+    cursor: default;
+
+    transition: background-color .3s ease-in-out;
+}
+
+.cn-box-1-l, .cn-box-1-m{
+    width: 100%;
+}
+
+.cn-box-1-hv{
+    cursor: pointer;
+}
+
+.cn-box-1-hv:hover{
+    background-color: #ddd;
+}
+
+.cn-box-1-hv:hover .cn-box-1-h{
+    transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+}
+
+/* 画像 テキスト ボックス */
+.cn-box-1-img, .cn-box-1-text, .cn-box-1-icon{
+    display: flex;
+    float: left;
+
+    height: 20rem;
+
+    justify-content: center;
+
+}
+
+.cn-box-1-img, .cn-box-1-icon{
+    width: 30%;
+
+    flex-direction: column;
+    align-items: center;
+
+    margin-left: 10%;
+
+}
+
+.cn-box-1-img img{
+    display: block;
+
+    width: 80%;
+    height: auto;
+
+    border-radius: 50%;
+}
+
+.cn-box-1-icon{
+    font-size: 10rem;
+}
+
+.cn-box-1-text{
+    width: 40%;
+
+    flex-direction: column;
+
+    margin-left: 5%;
+    margin-right: 15%;
+}
+
+/* 見出し 説明 */
+.cn-box-1-h, .cn-box-1-p{
+    padding: 1rem 0;
+}
+
+.cn-box-1-h{
+    font-size: 2.4rem;
+
+    transition: .3s ease-in-out;
+    -webkit-transition: .3s ease-in-out;
+    -moz-transition: .3s ease-in-out;
+    -ms-transition: .3s ease-in-out;
+
+    transform-origin: left;
+    -webkit-transform-origin: left;
+    -moz-transform-origin: left;
+    -ms-transform-origin: left;
+}
+
+.cn-box-1-l .cn-box-1-h, .cn-box-1-m .cn-box-1-h{
+    font-size: 3.2rem;
+}
+
+.cn-box-1-p{
+    font-size: 1.4rem;
+}
+
+.message .cn-box-1-p{
+    border-top: #333 solid 0.1rem;
+}
+
+.attention .cn-box-1-p, .yb-gold .cn-box-1-p{
+    font-size: 1.8rem;
+}
+
+/* ##### コンテンツボックス 2 基本設定 ##### */
+
+.cn-box-2{
+	float: left;
+	display: block;
+	width: 100%;
+	height: 30rem;
+	background-position: center center;
+	background-size: cover;
+	cursor: pointer;
+
+	position: relative;
+
+}
+
+.cn-box-2::before{
+	content: '';
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	width: 100%;
+	height: 30rem;
+
+
+	background-color: rgba(25, 25, 25, 0.5);
+
+	transition: background-color 0.3s ease-in-out;
+	-webkit-transition: background-color 0.3s ease-in-out;
+	-moz-transition: background-color 0.3s ease-in-out;
+	-ms-transition: background-color 0.3s ease-in-out;
+}
+
+.cn-box-2:hover::before{
+	background-color: rgba(100, 100, 100, 0.5);
+
+}
+
+.cn-box-2-text{
+	position: absolute;
+	width: 66.6666%;
+	margin: 0 16.66666%;
+	text-align: center;
+
+	top: 50%;
+	left: 50%;
+	transform: translateY(-50%)translateX(-50%);
+	-webkit-transform: translateY(-50%)translateX(-50%);
+    -moz-transform: translateY(-50%)translateX(-50%);
+    -ms-transform: translateY(-50%)translateX(-50%);
+
+	margin: auto;
+
+	color: #fff;
+
+	border-left: #fff 0.5rem solid;
+	padding: 1rem;
+	text-align: left;
+}
+
+.cn-box-2-h{
+	font-size: 3.2rem;
+	margin: 1rem 0 1rem;
+}
+
+.cn-box-2-p{
+	font-size: 2rem;
+	margin: 0 0 1rem;
+}
+
+/* ##### コンテンツボックス 3 基本設定 ##### */
+.cn-box-3{
+    display: flex;
+    float: left;
+
+    width: 100%;
+    min-height: 6rem;
+
+    padding: 1rem 0;
+
+    cursor: pointer;
+
+    transition: background-color .3s ease-in-out;
+
+    border-bottom: #ccc 0.1rem solid;
+
+    transition: background-color .3s ease-in-out;
+    -webkit-transition: background-color .3s ease-in-out;
+    -moz-transition: background-color .3s ease-in-out;
+    -ms-transition: background-color .3s ease-in-out;
+}
+
+.cn-box-3:nth-of-type(1){
+    border-top: #ccc 0.1rem solid;
+}
+
+.cn-box-3:hover{
+    background-color: #ddd;
+}
+
+.cn-box-3-h{
+    display: flex;
+    float: left;
+
+    width: 15%;
+    min-height: 6rem;
+
+    margin-left: 5%;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 3rem;
+}
+
+.cn-box-3-p-block{
+    display: block;
+    float: left;
+
+    width: 65%;
+    min-height: 6rem;
+}
+
+.cn-box-3-p{
+    display: flex;
+    float: left;
+
+    width: 90%;
+    height: 2rem;
+
+    margin: 1rem 0;
+    margin-left: 10%;
+    padding-left: 1rem;
+
+    flex-direction: column;
+    justify-content: center;
+
+    font-size: 1.6rem;
+
+    border-left: 0.5rem solid;
+}
+
+.cn-box-3-icon{
+    display: flex;
+    float: left;
+
+    width: 10%;
+    min-height: 6rem;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 3rem;
+
+    color: #ccc;
+}
+
+.border-color-pink{
+    border-color: #ff9999;
+}
+
+.border-color-blue{
+    border-color: #99ccff;
+}
+
+.border-color-green{
+    border-color: #99ff99;
+}
+
+.border-color-yellow{
+    border-color: #ffcc99;
+}
+
+.footer{
+    display: block;
+
+    width: 100%;
+    height: 20rem;
+    
+    margin-top: 10rem;
+
+    background-color: #ff9999;
+}
+
+.footer-menu{
+    display: flex;
+
+    width: 100%;
+    height: 15rem;
+}
+
+.footer-logo{
+    display: flex;
+    float: left;
+
+    flex-direction: column;
+    justify-content: center;
+
+    margin-left: 5%;
+
+    width: 100%;
+
+    color: #fff;
+}
+
+.footer-logo-h1{
+    font-size: 3rem;
+}
+
+.footer-logo-h2{
+    font-size: 1.8rem;
+}
+
+
+.copy-right{
+    display: flex;
+
+    height: 5rem;
+    width: 100%;
+
+    font-size: 1.4rem;
+
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    color: #fff;
+}
+
+.img-food{
+    background-image: url('/pamphlet/img/food.jpg');
+}
+
+.img-exhibition{
+    background-image: url('/pamphlet/img/exhibition.jpg');
+}
+
+.img-presentation{
+    background-image: url('/pamphlet/img/presentation.jpg');
+}
+
+.img-time-table{
+    background-image: url('/pamphlet/img/time-table.jpg');
+}
+
+.img-interview{
+    background-image: url('/pamphlet/img/interview.jpg');
+}
+
+.img-about-us{
+    background-image: url('/pamphlet/img/about-us.jpg');
+}
+
+
+@media (max-height: 689px){
+    .header{
+        height: 49rem;
+    }
+
+    .header-img{
+        height: 40rem;
+    }
+
+    .header-logo{
+        padding-top: 25rem;
+        font-size: 3rem;
+    }
+
+}
+
+@media(max-width: 349px){
+    .cn-box-3-p{
+        font-size: 1.2rem;
+    }
+}
+
+@media(max-width: 889px){
+
+    h1{
+        font-size: 4rem;
+    }
+
+    h2{
+        font-size: 2rem;
+    }
+
+    .document h1, .document h2, .document p{
+        padding: 0;
+    }
+
+    .document h1{
+		font-size: 4rem;
+    }
+
+    .document h2{
+		font-size: 2rem;
+    }
+
+    .document p{
+		font-size: 1.6rem;
+    }
+
+    nav{
+        width: 25rem;
+    }
+
+    .cn-button{
+        width: 30rem;
+        height: 5rem;
+
+        font-size: 2rem;
+    }
+
+    .cn-box-1, .cn-box-1-hv, .cn-box-1-m{
+        width: 100%;
+        height: 15rem;
+    }
+
+    .cn-box-1-img, .cn-box-1-icon, .cn-box-1-text{
+        height: 15rem;
+    }
+
+    .cn-box-1-icon{
+        font-size: 7.5rem
+    }
+
+    .fa-back-icon{
+        font-size: 4rem;
+    }
+
+    .fa-stack-1x{
+        line-height: 15rem;
+    }
+
+    .cn-box-1-img, .cn-box-1-icon{
+        margin-left: 7.5%;
+        width: 25%;
+    }
+
+    .cn-box-1-img img{
+        width: auto;
+        height: auto;
+
+        max-width: 100%;
+        max-height: 12.5rem;
+    }
+
+    .cn-box-1-text{
+        width: 55%;
+
+        margin-left: 5%;
+        margin-right: 7.5%;
+    }
+
+    .cn-box-1-h{
+        font-size: 2rem;
+    }
+
+    .cn-box-1-l .cn-box-1-h, .cn-box-1-m .cn-box-1-h{
+        font-size: 2.4rem;
+    }
+    
+    .cn-box-1-p{
+        font-size: 1.6rem;
+    }
+
+    .attention .cn-box-1-p, .yb-gold .cn-box-1-p{
+        font-size: 1.4rem;
+    }
+
+    .cn-box-3-h{
+        width: 20%;
+    }
+
+    .cn-box-3-p-block{
+        width: 60%;
+    }
+
+    .copy-right{
+        font-size: 1rem;
+    }
+
+}
+
+@media(min-width: 1190px){
+
+    .cn-box-1-m{
+        width: 33.3333%;
+    }
+
+    .cn-box-1-img img{
+        width: auto;
+        height: 70%;
+    }
+
+    .cn-box-2{
+		width: 33.3333%;
+	}
+}
