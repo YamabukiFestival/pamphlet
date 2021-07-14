@@ -79,7 +79,7 @@ nav {
     height: 125%;
     background: #ffffff;
     overflow-x: hidden;
-    overflow-y: hidden;
+    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     transition: all .5s;
     z-index: 3;
